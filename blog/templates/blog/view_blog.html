@@ -1,0 +1,47 @@
+{% extends "blog/base.html" %}
+{% block head_title %}View Blog{% endblock %}
+{% block page_title %}User Posts{% endblock %}
+{% block body_content %}
+ 
+{% for error in errors %}
+<p style="color:red">
+{{error}}
+</p>
+{% endfor %}
+
+<p>
+
+<ol>
+	
+		{% if items %}
+		<h2> Blog Posts</h2>
+		{% for item in items %}
+    <div id="date">
+    <div class="blog-post">
+      <h2 class="blog-post-title">{{item.title}}</h2>
+      <h4> Author: {{item.username}}</h4>
+       <h5><i> {{item.created}}</i></h5>
+       {{item.text}}
+    
+            {% if item.picture %}
+            <br>
+            <br>
+            <img src="/blog/photo/{{item.id}}" width="200px">
+            <br>
+        {% endif %} 
+		<br><br><br><br>
+		</p>
+		</div>
+	</div>
+		{% endfor %}
+		{% else %}
+		<center><h2> There are no blog posts to display! </h2></center>
+		{% endif %}
+</ol>
+</p>
+<!--
+<script type="text/javascript">
+var el = document.getElementById( 'date' );
+el.parentNode.removeChild( el );
+</script> -->
+{% endblock %}

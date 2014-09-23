@@ -1,0 +1,50 @@
+{% extends "blog/base.html" %}
+{% block head_title %}Register{% endblock %}
+
+{% block body_content %}
+
+{% for error in errors %}
+<p style="color: red">
+{{ error }}
+</p>
+{% endfor %}
+
+<form class="jumbotron" method="post" action="/blog/register">
+	<center>
+		
+<p>
+Register for an Account
+</p>
+<table>
+<tr>
+    <td>Email:</td>
+    <td><input type="email" class="form-control" name="email" value="{{email}}" autofocus="autofocus"></td>
+</tr>
+<tr>
+    <td>Username:</td>
+    <td><input type="text" class="form-control" name="username" value="{{username}}"></td>
+</tr>
+<tr>
+    <td>First Name:</td>
+    <td><input type="text" class="form-control" name="fName" value="{{fName}}"></td>
+</tr>
+<tr>
+    <td>Last Name:</td>
+    <td><input type="text" class="form-control" name="lName" value="{{lName}}"></td>
+</tr>
+<tr>
+    <td>Password:</td>
+    <td><input type="password" class="form-control" name="password1"></td>
+</tr>
+<tr>
+    <td>Confirm password:</td>
+    <td><input type="password" class="form-control" name="password2"></td>
+</tr>
+</table>
+
+<button class="btn btn-lg btn-primary" type="submit" value="register">Register</button>
+{% csrf_token %}
+</center>
+</form>
+
+{% endblock %}

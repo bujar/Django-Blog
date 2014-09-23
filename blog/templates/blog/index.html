@@ -1,0 +1,57 @@
+{% extends "blog/base.html" %}
+{% block head_title %}HomePage{% endblock %}
+{% block page_title %}Home{% endblock %}
+{% block body_content %}
+
+{% for error in errors %}
+<p style="color:red">
+{{error}}
+{% endfor %}
+</p>
+
+<p>
+{% if not user.is_authenticated %}
+<center> Welcome to CMU Official Blog. Please Log in to create your own blog or view one of the blogs on the left.</center>
+{% endif %}
+
+{% if user.is_authenticated %}
+<center> Welcome to CMU Official Blog. You can manage your posts by clicking on "Manage My Posts" in the top menu. You can follow other bloggers by clicking on them in the left sidebar</center>
+
+<br><br><br>
+<p>
+<ol>
+		{% if items %}
+		<h2> Blog Posts You Are Following </h2>
+		{% for item in items %}
+    <div id="date">
+    <div class="blog-post">
+      <h2 class="blog-post-title">{{item.title}}</h2>
+      <h4> Author: {{item.username}}</h4>
+       <h5><i> {{item.created}}</i></h5>
+       {{item.text}}
+    
+            {% if item.picture %}
+            <br>
+            <br>
+            <img src="/blog/photo/{{item.id}}" width="200px">
+            <br>
+        {% endif %} 
+		<br><br><br><br>
+		</p>
+		</div>
+	</div>
+		{% endfor %}
+		{% else %}
+		<center><h2> There are no blog posts to display! </h2></center>
+		{% endif %}
+	{% endif %}
+</ol>
+</p>
+</p>
+<!--
+<script type="text/javascript">
+var el = document.getElementById( 'date' );
+el.parentNode.removeChild( el );
+</script>
+-->
+{% endblock %}

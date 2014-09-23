@@ -1,0 +1,50 @@
+{% extends "blog/base.html" %}
+{% block head_title %}HomePage{% endblock %}
+
+{% block body_content %}
+
+{% for error in errors %}
+<p style="color:red">
+{{error}}
+</p>
+{% endfor %}
+
+<p>
+<form class="form-inline" action="/blog/add-item" method="post" enctype="multipart/form-data">
+
+  <div class="jumbotron">
+    <h2> Create a New Post </h2>
+  Title<br><input type="text" size="30" name="title"><br>
+    <br>Blog Post<textarea class="form-control" rows="3" cols="1" name="item" maxlength="160"></textarea><br>
+      Photo to include: <input type="file" name="picture">
+               <br><input type="submit" text="Add item">
+
+  {% csrf_token %}
+</form>
+<ol>
+    {% for item in items %}
+    <div id="date">
+    <div class="blog-post">
+      <h2 class="blog-post-title">{{item.title}}</h2>
+      <h4> Author: {{item.username}}</h4>
+       <h5><i> {{item.created}}</i></h5>
+       {{item.text}}
+    
+            {% if item.picture %}
+            <br>
+            <img src="/blog/photo/{{item.id}}" width="200px">
+            <br>
+        {% endif %} 
+        <br>
+      <a href="/blog/delete-item/{{item.id}}">Delete Post</a>
+
+        <br><br>
+        
+
+    </p>
+    </div>
+  </div>
+    {% endfor %}
+</ol>
+</p>
+{% endblock %}
